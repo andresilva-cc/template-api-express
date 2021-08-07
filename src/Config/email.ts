@@ -1,5 +1,5 @@
 import env from '../App/Utils/env';
-import { parseBoolean } from '../App/Utils/Helpers';
+import { parseBoolean } from '../App/Utils/helpers';
 
 export const EMAIL_SMTP_HOST = env('EMAIL_SMTP_HOST', 'smtp.domain.com');
 
