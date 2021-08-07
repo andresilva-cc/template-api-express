@@ -30,7 +30,7 @@ export default class App {
   }
 
   start() {
-    if (this.options.enableHTTPS) {
+    if (this.options.enableSSL) {
       const options = {
         key: fs.readFileSync(this.options.ssl.key),
         cert: fs.readFileSync(this.options.ssl.cert),
@@ -49,7 +49,7 @@ export default class App {
 
 interface AppOptions {
   port: string;
-  enableHTTPS: boolean;
+  enableSSL: boolean;
   ssl: SSLOptions;
 }
 
