@@ -2,6 +2,7 @@ import fs from 'fs';
 import http from 'http';
 import https from 'https';
 import express from 'express';
+import { Sequelize } from 'sequelize-typescript';
 import registerRoutes from './Routes';
 import Logger from './App/Utils/Logger';
 
@@ -9,6 +10,8 @@ export default class App {
   private app: express.Express;
 
   private options: AppOptions;
+
+  private sequelize: Sequelize;
 
   constructor(options: AppOptions, middlewares: any) {
     Logger.info('Initializing Express application...');
@@ -20,6 +23,17 @@ export default class App {
 
     registerRoutes(this.app);
     Logger.info('Routes registered');
+
+    this.sequelize = new Sequelize({
+      dialect: this.options.database.dialect,
+      host: this.options.database.host,
+      port: this.options.database.port,
+      database: this.options.database.database,
+      username: this.options.database.username,
+      password: this.options.database.password,
+      models: [`${__dirname}/App/Models`],
+    });
+    Logger.info('Database connection created');
   }
 
   private loadMiddlewares(middlewares: express.NextFunction[]) {
@@ -48,12 +62,25 @@ export default class App {
 }
 
 interface AppOptions {
-  port: string;
+  port: number;
   enableSSL: boolean;
   ssl: SSLOptions;
+  database: DatabaseOptions;
 }
 
 interface SSLOptions {
   key: string;
   cert: string;
 }
+
+interface DatabaseOptions {
+  dialect?: Dialect;
+  host?: string;
+  port?: number;
+  database?: string;
+  username?: string;
+  password?: string;
+  storage?: string;
+}
+
+export type Dialect = 'mysql' | 'mariadb' | 'sqlite' | 'postgres' | 'mssql';
