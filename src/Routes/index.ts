@@ -1,8 +1,8 @@
 import { Express } from 'express';
-import HelloWorld from './HelloWorld';
+import Auth from './Auth';
 
 const routes = [
-  HelloWorld,
+  Auth,
 ];
 
 export default function registerRoutes(application: Express) {
