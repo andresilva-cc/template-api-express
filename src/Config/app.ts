@@ -7,7 +7,7 @@ export const APP_URL = env('APP_URL', 'http://api.myapp.com');
 
 export const APP_SSL = parseBoolean(env('APP_SSL', 'false'));
 
-export const APP_PORT = env('APP_PORT', '80');
+export const APP_PORT = parseInt(env('APP_PORT', '80'), 10);
 
 export const APP_SSL_KEY = env('APP_SSL_KEY', '');
 
