@@ -3,6 +3,7 @@ import http from 'http';
 import https from 'https';
 import express from 'express';
 import { Sequelize } from 'sequelize-typescript';
+import errorMiddleware from './Middlewares/errorMiddleware';
 import registerRoutes from './Routes';
 import Logger from './App/Utils/Logger';
 
@@ -24,6 +25,8 @@ export default class App {
     registerRoutes(this.app);
     Logger.info('Routes registered');
 
+    this.loadErrorMiddleware();
+
     this.sequelize = new Sequelize({
       dialect: this.options.database.dialect,
       host: this.options.database.host,
@@ -41,6 +44,11 @@ export default class App {
       this.app.use(middleware);
       Logger.info(`Middleware loaded: ${middleware.name}`);
     });
+  }
+
+  private loadErrorMiddleware() {
+    this.app.use(errorMiddleware);
+    Logger.info('Error midleware loaded');
   }
 
   start() {
