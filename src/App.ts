@@ -12,21 +12,37 @@ export default class App {
 
   private options: AppOptions;
 
-  private sequelize: Sequelize;
+  private sequelize?: Sequelize;
 
   constructor(options: AppOptions, middlewares: any) {
     Logger.info('Initializing Express application...');
     this.app = express();
-
     this.options = options;
 
-    this.loadMiddlewares(middlewares);
+    this.registerMiddlewares(middlewares);
+    this.registerRoutes();
+    this.registerErrorMiddleware();
+    this.createDatabaseConnection();
+  }
 
+  private registerMiddlewares(middlewares: express.NextFunction[]) {
+    middlewares.forEach((middleware) => {
+      this.app.use(middleware);
+      Logger.info(`Middleware registered: ${middleware.name}`);
+    });
+  }
+
+  private registerRoutes() {
     registerRoutes(this.app);
     Logger.info('Routes registered');
+  }
 
-    this.loadErrorMiddleware();
+  private registerErrorMiddleware() {
+    this.app.use(errorMiddleware);
+    Logger.info('Error midleware registered');
+  }
 
+  private createDatabaseConnection() {
     this.sequelize = new Sequelize({
       dialect: this.options.database.dialect,
       host: this.options.database.host,
@@ -37,18 +53,6 @@ export default class App {
       models: [`${__dirname}/App/Models`],
     });
     Logger.info('Database connection created');
-  }
-
-  private loadMiddlewares(middlewares: express.NextFunction[]) {
-    middlewares.forEach((middleware) => {
-      this.app.use(middleware);
-      Logger.info(`Middleware loaded: ${middleware.name}`);
-    });
-  }
-
-  private loadErrorMiddleware() {
-    this.app.use(errorMiddleware);
-    Logger.info('Error midleware loaded');
   }
 
   start() {
