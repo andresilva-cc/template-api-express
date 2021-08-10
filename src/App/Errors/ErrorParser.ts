@@ -27,9 +27,9 @@ export default class ErrorParser {
       case 'SequelizeValidationError':
       case 'SequelizeUniqueConstraintError':
         return new ValidationError(
-          error.errors[0]?.message,
-          error.errors[0]?.path,
-          error.errors[0]?.validatorKey,
+          error.errors?.[0]?.message,
+          error.errors?.[0]?.path,
+          error.errors?.[0]?.validatorKey,
           error.name,
           error.stack,
         );
