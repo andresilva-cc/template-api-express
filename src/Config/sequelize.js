@@ -1,3 +1,8 @@
+/**
+ * This file is used only by sequelize-cli
+ * The rest of the app uses the connection defined on App.ts
+ */
+
 require('dotenv').config();
 
 module.exports = {
