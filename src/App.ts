@@ -3,9 +3,10 @@ import http from 'http';
 import https from 'https';
 import express from 'express';
 import { Sequelize } from 'sequelize-typescript';
-import errorMiddleware from './Middlewares/errorMiddleware';
+import { errorMiddleware } from './Middlewares';
 import registerRoutes from './Routes';
 import Logger from './App/Utils/Logger';
+import * as models from './App/Models';
 
 export default class App {
   private app: express.Express;
@@ -50,7 +51,7 @@ export default class App {
       database: this.options.database.database,
       username: this.options.database.username,
       password: this.options.database.password,
-      models: [`${__dirname}/App/Models`],
+      models: Object.values(models),
     });
     Logger.info('Database connection created');
   }

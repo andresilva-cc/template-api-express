@@ -1,11 +1,8 @@
 import BaseError from './BaseError';
-import BadRequestError from './BadRequestError';
-import ForbiddenError from './ForbiddenError';
-import ResourceNotFoundError from './ResourceNotFoundError';
-import ServiceUnavailableError from './ServiceUnavailableError';
-import ValidationError from './ValidationError';
-import UnauthorizedError from './UnauthorizedError';
-import UnknownError from './UnknownError';
+import {
+  BadRequestError, ForbiddenError, ResourceNotFoundError, ServiceUnavailableError, ValidationError,
+  UnauthorizedError, UnknownError,
+} from '.';
 
 export default class ErrorParser {
   public static parse(error: any): BaseError {
