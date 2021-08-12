@@ -9,12 +9,16 @@ export default abstract class BaseRepository {
     this.model = model;
   }
 
-  public async all(): Promise<Model[]> {
-    return this.model.findAll();
+  public async all(attributes?: string[]): Promise<Model[]> {
+    return this.model.findAll({
+      attributes,
+    });
   }
 
-  public async findById(id: number): Promise<Model> {
-    const resource = await this.model.findByPk(id);
+  public async findById(id: number, attributes?: string[]): Promise<Model> {
+    const resource = await this.model.findByPk(id, {
+      attributes,
+    });
 
     if (resource) {
       return resource;
