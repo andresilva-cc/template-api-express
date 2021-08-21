@@ -2,6 +2,7 @@ import fs from 'fs';
 import http from 'http';
 import https from 'https';
 import express from 'express';
+import Passport from 'passport';
 import { Sequelize } from 'sequelize-typescript';
 import { errorMiddleware } from './Middlewares';
 import registerRoutes from './Routes';
@@ -15,12 +16,13 @@ export default class App {
 
   private sequelize?: Sequelize;
 
-  constructor(options: AppOptions, middlewares: any) {
+  constructor(options: AppOptions, middlewares: any, authStrategies: Passport.Strategy[]) {
     Logger.info('Initializing Express application...');
     this.app = express();
     this.options = options;
 
     this.registerMiddlewares(middlewares);
+    App.registerAuthStrategies(authStrategies);
     this.registerRoutes();
     this.registerErrorMiddleware();
     this.createDatabaseConnection();
@@ -30,6 +32,13 @@ export default class App {
     middlewares.forEach((middleware) => {
       this.app.use(middleware);
       Logger.info(`Middleware registered: ${middleware.name}`);
+    });
+  }
+
+  private static registerAuthStrategies(strategies: Passport.Strategy[]) {
+    strategies.forEach((strategy) => {
+      Passport.use(strategy);
+      Logger.info(`Auth strategy registered: ${strategy.name}`);
     });
   }
 

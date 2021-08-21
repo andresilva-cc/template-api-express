@@ -1,7 +1,7 @@
 import BaseError from './BaseError';
 import {
-  BadRequestError, EmailAlreadyInUseError, ForbiddenError, ResourceNotFoundError,
-  ServiceUnavailableError, ValidationError, UnauthorizedError, UnknownError,
+  BadRequestError, EmailAlreadyInUseError, ForbiddenError, InvalidCredentialsError,
+  ResourceNotFoundError, ServiceUnavailableError, ValidationError, UnauthorizedError, UnknownError,
 } from '.';
 
 export default class ErrorParser {
@@ -15,6 +15,9 @@ export default class ErrorParser {
 
       case 'ForbiddenError':
         return new ForbiddenError(error.name, error.stack);
+
+      case 'InvalidCredentialsError':
+        return new InvalidCredentialsError();
 
       case 'ResourceNotFoundError':
         return new ResourceNotFoundError(error.name, error.stack);

@@ -1,6 +1,7 @@
 import morgan from 'morgan';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import Passport from 'passport';
 import App, { Dialect } from './App';
 import {
   APP_PORT, APP_SSL, APP_SSL_KEY, APP_SSL_CERT,
@@ -8,6 +9,7 @@ import {
 import {
   DB_DIALECT, DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD,
 } from './Config/database';
+import * as authStrategies from './App/Auth';
 
 new App(
   // Options
@@ -34,5 +36,9 @@ new App(
     cors(),
     bodyParser.urlencoded({ extended: true }),
     bodyParser.json(),
+    Passport.initialize(),
   ],
+
+  // Auth strategies
+  Object.values(authStrategies),
 ).start();
