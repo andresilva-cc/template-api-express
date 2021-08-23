@@ -608,7 +608,7 @@
                     "objectType": "TableField_PGSQL",
                     "name": "token",
                     "type": "char",
-                    "length": 32,
+                    "length": 21,
                     "decimals": -1,
                     "dimensions": 0,
                     "collation": "",
