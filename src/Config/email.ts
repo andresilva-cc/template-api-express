@@ -3,7 +3,7 @@ import { parseBoolean } from '../App/Utils/helpers';
 
 export const EMAIL_SMTP_HOST = env('EMAIL_SMTP_HOST', 'smtp.domain.com');
 
-export const EMAIL_SMTP_PORT = env('EMAIL_SMTP_PORT', '587');
+export const EMAIL_SMTP_PORT = parseInt(env('EMAIL_SMTP_PORT', '587'), 10);
 
 export const EMAIL_SMTP_SECURE = parseBoolean(env('EMAIL_SMTP_SECURE', 'true'));
 
