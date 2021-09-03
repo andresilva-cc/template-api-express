@@ -16,12 +16,10 @@ export default new LocalStrategy({
       throw new InvalidCredentialsError();
     }
 
-    // @ts-ignore
     if (!user.active) {
       throw new AccountNotActivatedError();
     }
 
-    // @ts-ignore
     const passwordMatches = PasswordFacade.compare(password, user.password);
 
     if (!passwordMatches) {
@@ -30,9 +28,7 @@ export default new LocalStrategy({
 
     return done(null, {
       id: user.id,
-      // @ts-ignore
       email: user.email,
-      // @ts-ignore
       name: user.name,
     });
   } catch (ex) {

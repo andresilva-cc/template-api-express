@@ -1,22 +1,20 @@
-import { Model, ModelCtor } from 'sequelize-typescript';
+/* eslint-disable class-methods-use-this */
+
 import ResourceNotFoundError from '../Errors/ResourceNotFoundError';
 
-// TODO: Use generics so that a child class return the correct Model type
-export default abstract class BaseRepository {
-  protected model: ModelCtor;
-
-  constructor(model: ModelCtor) {
-    this.model = model;
-  }
-
+// TODO: Find a way to light up IntelliSense with the generic Model type and also to avoid the error
+// TODO: 'Model' only refers to a type, but is being used as a value here.'
+export default abstract class BaseRepository<Model> {
   public async all(attributes?: string[]): Promise<Model[]> {
-    return this.model.findAll({
+    // @ts-ignore
+    return Model.findAll({
       attributes,
     });
   }
 
   public async findById(id: number, attributes?: string[]): Promise<Model> {
-    const resource = await this.model.findByPk(id, {
+    // @ts-ignore
+    const resource = await Model.findByPk(id, {
       attributes,
     });
 
@@ -28,13 +26,15 @@ export default abstract class BaseRepository {
   }
 
   public async create(data: any): Promise<Model> {
-    return this.model.create(data);
+    // @ts-ignore
+    return Model.create(data);
   }
 
   public async update(id: number, data: any): Promise<Model> {
     const resource = await this.findById(id);
 
     if (resource) {
+      // @ts-ignore
       return resource.update(data);
     }
 
@@ -45,6 +45,7 @@ export default abstract class BaseRepository {
     const resource = await this.findById(id);
 
     if (resource) {
+      // @ts-ignore
       await resource.destroy();
       return true;
     }

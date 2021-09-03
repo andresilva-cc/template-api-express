@@ -18,7 +18,7 @@ export default class AuthService {
       password: PasswordFacade.hash(password),
     });
 
-    this.createUserActivation(user as User);
+    this.createUserActivation(user);
   }
 
   public static async activate(token: string): Promise<void> {
@@ -28,15 +28,12 @@ export default class AuthService {
       throw new BadRequestError();
     }
 
-    // @ts-ignore
     await userRepository.update(activation.user.id, {
       active: true,
     });
 
-    // @ts-ignore
     await userActivationRepository.delete(activation.userId);
 
-    // @ts-ignore
     AuthService.sendUserActivatedMail(activation.user as User);
   }
 

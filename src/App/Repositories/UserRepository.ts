@@ -1,14 +1,11 @@
-import { Model } from 'sequelize-typescript';
+/* eslint-disable class-methods-use-this */
+
 import BaseRepository from './BaseRepository';
 import { User } from '../Models';
 
-export default class UserRepository extends BaseRepository {
-  constructor() {
-    super(User);
-  }
-
-  public async findByEmail(email: string): Promise<Model | null> {
-    return this.model.findOne({
+export default class UserRepository extends BaseRepository<User> {
+  public async findByEmail(email: string): Promise<User | null> {
+    return User.findOne({
       where: {
         email,
       },
@@ -16,7 +13,7 @@ export default class UserRepository extends BaseRepository {
   }
 
   public async emailExists(email: string): Promise<boolean> {
-    const user = await this.model.findOne({
+    const user = await User.findOne({
       where: {
         email,
       },

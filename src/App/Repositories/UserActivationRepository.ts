@@ -1,14 +1,11 @@
-import { Model } from 'sequelize-typescript';
+/* eslint-disable class-methods-use-this */
+
 import BaseRepository from './BaseRepository';
 import { User, UserActivation } from '../Models';
 
-export default class UserActivationRepository extends BaseRepository {
-  constructor() {
-    super(UserActivation);
-  }
-
-  public async findByToken(token: string): Promise<Model | null> {
-    return this.model.findOne({
+export default class UserActivationRepository extends BaseRepository<UserActivation> {
+  public async findByToken(token: string): Promise<UserActivation | null> {
+    return UserActivation.findOne({
       where: {
         token,
       },
