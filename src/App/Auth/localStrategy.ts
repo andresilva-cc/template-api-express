@@ -1,5 +1,5 @@
 import { Strategy as LocalStrategy } from 'passport-local';
-import { InvalidCredentialsError } from '../Errors';
+import { AccountNotActivatedError, InvalidCredentialsError } from '../Errors';
 import ErrorParser from '../Errors/ErrorParser';
 import { PasswordFacade } from '../Facades';
 import { userRepository } from '../Repositories';
@@ -14,6 +14,11 @@ export default new LocalStrategy({
 
     if (!user) {
       throw new InvalidCredentialsError();
+    }
+
+    // @ts-ignore
+    if (!user.active) {
+      throw new AccountNotActivatedError();
     }
 
     // @ts-ignore

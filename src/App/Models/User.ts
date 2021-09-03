@@ -1,5 +1,5 @@
 import {
-  Table, Column, Model, CreatedAt, UpdatedAt, IsEmail, Length, AllowNull, Unique,
+  Table, Column, Model, CreatedAt, UpdatedAt, IsEmail, Length, AllowNull, Unique, Default,
 } from 'sequelize-typescript';
 
 @Table
@@ -20,6 +20,11 @@ export default class User extends Model {
   @AllowNull(false)
   @Column
   password!: string;
+
+  @Default(false)
+  @AllowNull(false)
+  @Column
+  active!: boolean;
 
   @CreatedAt
   createdAt!: Date;

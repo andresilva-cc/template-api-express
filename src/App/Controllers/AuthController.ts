@@ -15,4 +15,18 @@ export default class AuthController {
       return next(error);
     }
   }
+
+  public static async activate(request: Request, response: Response, next: NextFunction) {
+    try {
+      await AuthService.activate(request.params.token);
+
+      return response.status(200).send('Account activated, you can login now.');
+    } catch (error) {
+      if (error instanceof BadRequestError) {
+        return response.status(400).send('Invalid activation token.');
+      }
+
+      return next(error);
+    }
+  }
 }
