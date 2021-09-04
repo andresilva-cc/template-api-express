@@ -23,3 +23,8 @@ $ npm run dev
 # build for production and run in production
 $ npm run build
 $ npm run start
+```
+
+## To Do
+
+[Trello board](https://trello.com/b/12gmFXeQ)
