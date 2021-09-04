@@ -1,36 +1,39 @@
 /* eslint-disable class-methods-use-this */
 
+import { Model } from 'sequelize-typescript';
 import ResourceNotFoundError from '../Errors/ResourceNotFoundError';
 
-// TODO: Find a way to light up IntelliSense with the generic Model type and also to avoid the error
-// TODO: 'Model' only refers to a type, but is being used as a value here.'
-export default abstract class BaseRepository<Model> {
-  public async all(attributes?: string[]): Promise<Model[]> {
+// TODO: Find a way to remove the @ts-ignore comments without getting any errors
+export default abstract class BaseRepository<M extends Model> {
+  constructor(protected model: typeof Model) {}
+
+  public async all(attributes?: string[]): Promise<M[]> {
     // @ts-ignore
-    return Model.findAll({
+    return this.model.findAll({
       attributes,
     });
   }
 
-  public async findById(id: number, attributes?: string[]): Promise<Model> {
+  public async findById(id: number, attributes?: string[]): Promise<M> {
     // @ts-ignore
-    const resource = await Model.findByPk(id, {
+    const resource = await this.model.findByPk(id, {
       attributes,
     });
 
     if (resource) {
+      // @ts-ignore
       return resource;
     }
 
     throw new ResourceNotFoundError();
   }
 
-  public async create(data: any): Promise<Model> {
+  public async create(data: any): Promise<M> {
     // @ts-ignore
-    return Model.create(data);
+    return this.model.create(data);
   }
 
-  public async update(id: number, data: any): Promise<Model> {
+  public async update(id: number, data: any): Promise<M> {
     const resource = await this.findById(id);
 
     if (resource) {
