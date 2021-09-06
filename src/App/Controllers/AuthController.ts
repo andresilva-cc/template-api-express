@@ -1,15 +1,23 @@
 import { NextFunction, Request, Response } from 'express';
+import { SequelizeUserRepository, SequelizeUserActivationRepository } from '../Repositories/Implementation';
 import { BadRequestError } from '../Errors';
 import { AuthService } from '../Services';
 
 export default class AuthController {
+  private static authService = new AuthService(
+    new SequelizeUserRepository(),
+    new SequelizeUserActivationRepository(),
+  );
+
   public static async register(request: Request, response: Response, next: NextFunction) {
     try {
       if (!request.body.email || !request.body.password) {
         throw new BadRequestError();
       }
 
-      await AuthService.register(request.body.name, request.body.email, request.body.password);
+      await AuthController.authService.register(
+        request.body.name, request.body.email, request.body.password,
+      );
       return response.sendStatus(201);
     } catch (error) {
       return next(error);
@@ -18,7 +26,7 @@ export default class AuthController {
 
   public static async activate(request: Request, response: Response, next: NextFunction) {
     try {
-      await AuthService.activate(request.params.token);
+      await AuthController.authService.activate(request.params.token);
 
       return response.status(200).send('Account activated, you can login now.');
     } catch (error) {

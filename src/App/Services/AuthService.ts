@@ -4,15 +4,20 @@ import { BadRequestError, EmailAlreadyInUseError } from '../Errors';
 import { PasswordFacade } from '../Facades';
 import { UserActivatedMail, UserRegisteredMail } from '../Mail';
 import { User } from '../Models';
-import { userRepository, userActivationRepository } from '../Repositories';
+import { UserActivationRepository, UserRepository } from '../Repositories';
 
 export default class AuthService {
-  public static async register(name: string, email: string, password: string): Promise<void> {
-    if (await userRepository.emailExists(email)) {
+  constructor(
+    private userRepository: UserRepository,
+    private userActivationRepository: UserActivationRepository,
+  ) {}
+
+  public async register(name: string, email: string, password: string): Promise<void> {
+    if (await this.userRepository.emailExists(email)) {
       throw new EmailAlreadyInUseError();
     }
 
-    const user = await userRepository.create({
+    const user = await this.userRepository.create({
       name,
       email,
       password: PasswordFacade.hash(password),
@@ -21,23 +26,23 @@ export default class AuthService {
     this.createUserActivation(user);
   }
 
-  public static async activate(token: string): Promise<void> {
-    const activation = await userActivationRepository.findByToken(token);
+  public async activate(token: string): Promise<void> {
+    const activation = await this.userActivationRepository.findByToken(token);
 
     if (!activation) {
       throw new BadRequestError();
     }
 
-    await userRepository.update(activation.user.id, {
+    await this.userRepository.update(activation.user.id, {
       active: true,
     });
 
-    await userActivationRepository.delete(activation.userId);
+    await this.userActivationRepository.delete(activation.userId);
 
     AuthService.sendUserActivatedMail(activation.user as User);
   }
 
-  private static async createUserActivation(user: User): Promise<void> {
+  private async createUserActivation(user: User): Promise<void> {
     let token;
     let activationExists;
 
@@ -45,10 +50,10 @@ export default class AuthService {
     do {
       token = nanoid(21);
       // eslint-disable-next-line no-await-in-loop
-      activationExists = await userActivationRepository.findByToken(token);
+      activationExists = await this.userActivationRepository.findByToken(token);
     } while (activationExists);
 
-    await userActivationRepository.create({
+    await this.userActivationRepository.create({
       userId: user.id,
       token,
     });

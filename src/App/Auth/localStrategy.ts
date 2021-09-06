@@ -2,7 +2,7 @@ import { Strategy as LocalStrategy } from 'passport-local';
 import { AccountNotActivatedError, InvalidCredentialsError } from '../Errors';
 import ErrorParser from '../Errors/ErrorParser';
 import { PasswordFacade } from '../Facades';
-import { userRepository } from '../Repositories';
+import { SequelizeUserRepository } from '../Repositories/Implementation';
 
 // TODO: Remove @ts-ignore comments when repositories return the appropriate model
 export default new LocalStrategy({
@@ -10,6 +10,8 @@ export default new LocalStrategy({
   passwordField: 'password',
 }, async (email: string, password: string, done: any) => {
   try {
+    const userRepository = new SequelizeUserRepository();
+
     const user = await userRepository.findByEmail(email);
 
     if (!user) {

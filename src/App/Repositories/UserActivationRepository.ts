@@ -1,21 +1,5 @@
-/* eslint-disable class-methods-use-this */
-
 import BaseRepository from './BaseRepository';
-import { User, UserActivation } from '../Models';
 
-export default class UserActivationRepository extends BaseRepository<UserActivation> {
-  constructor() {
-    super(UserActivation);
-  }
-
-  public async findByToken(token: string): Promise<UserActivation | null> {
-    return UserActivation.findOne({
-      where: {
-        token,
-      },
-      include: [
-        User,
-      ],
-    });
-  }
+export default interface UserActivationRepository extends BaseRepository {
+  findByToken(token: string): Promise<any | null>;
 }
