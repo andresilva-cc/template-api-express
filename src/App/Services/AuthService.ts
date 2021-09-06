@@ -10,6 +10,7 @@ export default class AuthService {
   constructor(
     private userRepository: UserRepository,
     private userActivationRepository: UserActivationRepository,
+    private mailService: MailService,
   ) {}
 
   public async register(name: string, email: string, password: string): Promise<void> {
@@ -39,7 +40,7 @@ export default class AuthService {
 
     await this.userActivationRepository.delete(activation.userId);
 
-    AuthService.sendUserActivatedMail(activation.user as User);
+    this.sendUserActivatedMail(activation.user as User);
   }
 
   private async createUserActivation(user: User): Promise<void> {
@@ -58,14 +59,14 @@ export default class AuthService {
       token,
     });
 
-    AuthService.sendUserRegisteredMail(user, token);
+    this.sendUserRegisteredMail(user, token);
   }
 
-  private static sendUserRegisteredMail(user: User, token: string) {
-    MailService.send(new UserRegisteredMail(user.name, user.email, token).build());
+  private sendUserRegisteredMail(user: User, token: string) {
+    this.mailService.send(new UserRegisteredMail(user.name, user.email, token).build());
   }
 
-  private static sendUserActivatedMail(user: User) {
-    MailService.send(new UserActivatedMail(user.name, user.email).build());
+  private sendUserActivatedMail(user: User) {
+    this.mailService.send(new UserActivatedMail(user.name, user.email).build());
   }
 }

@@ -4,8 +4,10 @@ import {
 } from '../../Config/mail';
 
 export default class MailService {
-  private static createTransport(): nodemailer.Transporter {
-    return nodemailer.createTransport({
+  private transport: nodemailer.Transporter;
+
+  constructor() {
+    this.transport = nodemailer.createTransport({
       host: MAIL_SMTP_HOST,
       port: MAIL_SMTP_PORT,
       auth: {
@@ -15,7 +17,7 @@ export default class MailService {
     });
   }
 
-  static async send(options: nodemailer.SendMailOptions): Promise<nodemailer.SentMessageInfo> {
-    return this.createTransport().sendMail(options);
+  public async send(options: nodemailer.SendMailOptions): Promise<nodemailer.SentMessageInfo> {
+    return this.transport.sendMail(options);
   }
 }
