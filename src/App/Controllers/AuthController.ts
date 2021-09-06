@@ -1,14 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
-import { SequelizeUserRepository, SequelizeUserActivationRepository } from '../Repositories/Implementation';
 import { BadRequestError } from '../Errors';
-import { AuthService, MailService } from '../Services';
+import { AuthService } from '../Services';
+import container from '../../container';
 
 export default class AuthController {
-  private static authService = new AuthService(
-    new SequelizeUserRepository(),
-    new SequelizeUserActivationRepository(),
-    new MailService(),
-  );
+  private static authService = <AuthService>container.get('AuthService');
 
   public static async register(request: Request, response: Response, next: NextFunction) {
     try {
