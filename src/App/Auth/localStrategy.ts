@@ -5,7 +5,7 @@ import { PasswordFacade } from '../Facades';
 import { SequelizeUserRepository } from '../Repositories/Implementation';
 
 // TODO: Remove @ts-ignore comments when repositories return the appropriate model
-export default new LocalStrategy({
+const localStrategy = new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
 }, async (email: string, password: string, done: any) => {
@@ -37,3 +37,5 @@ export default new LocalStrategy({
     return done(ErrorParser.parse(ex));
   }
 });
+
+export default localStrategy;

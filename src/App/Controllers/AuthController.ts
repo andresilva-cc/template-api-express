@@ -3,7 +3,7 @@ import { BadRequestError } from '../Errors';
 import { AuthService } from '../Services';
 import container from '../../container';
 
-export default class AuthController {
+class AuthController {
   private static authService = <AuthService>container.get('AuthService');
 
   public static async register(request: Request, response: Response, next: NextFunction) {
@@ -35,3 +35,5 @@ export default class AuthController {
     }
   }
 }
+
+export default AuthController;

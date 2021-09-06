@@ -1,6 +1,6 @@
 import BaseError from './BaseError';
 
-export default class ServiceUnavailableError extends BaseError {
+class ServiceUnavailableError extends BaseError {
   constructor(
     public originalName?: string,
     public stackTrace?: string,
@@ -15,3 +15,5 @@ export default class ServiceUnavailableError extends BaseError {
     );
   }
 }
+
+export default ServiceUnavailableError;

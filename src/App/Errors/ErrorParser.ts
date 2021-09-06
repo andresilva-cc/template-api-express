@@ -5,7 +5,7 @@ import {
   UnauthorizedError, UnknownError,
 } from '.';
 
-export default class ErrorParser {
+class ErrorParser {
   public static parse(error: any): BaseError {
     switch (error.name) {
       case 'AccountNotActivatedError':
@@ -49,3 +49,5 @@ export default class ErrorParser {
     }
   }
 }
+
+export default ErrorParser;

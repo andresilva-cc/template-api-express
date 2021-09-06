@@ -5,6 +5,8 @@ const routes = [
   auth,
 ];
 
-export default function registerRoutes(application: Express) {
+function registerRoutes(application: Express) {
   routes.forEach((route) => route(application));
 }
+
+export default registerRoutes;

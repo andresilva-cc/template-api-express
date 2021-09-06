@@ -2,7 +2,7 @@ import nodemailer from 'nodemailer';
 import MailTemplate from './MailTemplate';
 import { APP_URL } from '../../Config/app';
 
-export default class UserRegisteredMail extends MailTemplate {
+class UserRegisteredMail extends MailTemplate {
   constructor(
     protected toName: string,
     protected toAddress: string,
@@ -29,3 +29,5 @@ export default class UserRegisteredMail extends MailTemplate {
     return `${APP_URL}/auth/activate/${this.token}`;
   }
 }
+
+export default UserRegisteredMail;

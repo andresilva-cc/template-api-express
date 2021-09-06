@@ -3,7 +3,7 @@ import Passport from 'passport';
 import { BadRequestError } from '../../App/Errors';
 import { TokenFacade } from '../../App/Facades';
 
-export default function localStrategyMiddleware(
+function localStrategyMiddleware(
   request: Request, response: Response, next: NextFunction,
 ) {
   // TODO: Check if Passport somehow automatically checks this
@@ -24,3 +24,5 @@ export default function localStrategyMiddleware(
     });
   })(request, response, next);
 }
+
+export default localStrategyMiddleware;

@@ -6,7 +6,7 @@ import { UserActivatedMail, UserRegisteredMail } from '../Mail';
 import { User } from '../Models';
 import { UserActivationRepository, UserRepository } from '../Repositories';
 
-export default class AuthService {
+class AuthService {
   constructor(
     private userRepository: UserRepository,
     private userActivationRepository: UserActivationRepository,
@@ -70,3 +70,5 @@ export default class AuthService {
     this.mailService.send(new UserActivatedMail(user.name, user.email).build());
   }
 }
+
+export default AuthService;

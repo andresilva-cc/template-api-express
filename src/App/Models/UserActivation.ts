@@ -6,7 +6,7 @@ import User from './User';
 @Table({
   timestamps: false,
 })
-export default class UserActivation extends Model {
+class UserActivation extends Model {
   @AllowNull(false)
   @ForeignKey(() => User)
   @PrimaryKey
@@ -21,3 +21,5 @@ export default class UserActivation extends Model {
   @Column(DataType.CHAR)
   token!: string;
 }
+
+export default UserActivation;

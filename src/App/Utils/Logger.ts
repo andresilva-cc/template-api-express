@@ -4,7 +4,7 @@ import symbols from 'log-symbols';
 import chalk from 'chalk';
 import { APP_ENV } from '../../Config/app';
 
-export default class Logger {
+class Logger {
   static info(message: string, environments = ['production', 'development', 'test']) {
     if (environments.includes(APP_ENV || 'production')) {
       console.log(symbols.info, chalk.blue(message));
@@ -29,3 +29,5 @@ export default class Logger {
     }
   }
 }
+
+export default Logger;

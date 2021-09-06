@@ -1,6 +1,6 @@
 import BaseError from './BaseError';
 
-export default class BadRequestError extends BaseError {
+class BadRequestError extends BaseError {
   constructor(
     public originalName?: string,
     public stackTrace?: string,
@@ -15,3 +15,5 @@ export default class BadRequestError extends BaseError {
     );
   }
 }
+
+export default BadRequestError;

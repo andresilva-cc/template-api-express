@@ -1,6 +1,6 @@
 import BaseError from './BaseError';
 
-export default class UnauthorizedError extends BaseError {
+class UnauthorizedError extends BaseError {
   constructor(
     public originalName?: string,
     public stackTrace?: string,
@@ -15,3 +15,5 @@ export default class UnauthorizedError extends BaseError {
     );
   }
 }
+
+export default UnauthorizedError;

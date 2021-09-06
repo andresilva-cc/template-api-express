@@ -13,7 +13,7 @@ const parseErrorAndSendResponse = (error: any, response: Response) => {
 
 const isErrorProperlyFormatted = (error: any) => error instanceof BaseError;
 
-export default (error: any, _request: Request, response: Response, next: NextFunction) => {
+const middleware = (error: any, _request: Request, response: Response, next: NextFunction) => {
   if (!error) {
     return next();
   }
@@ -24,3 +24,5 @@ export default (error: any, _request: Request, response: Response, next: NextFun
 
   return parseErrorAndSendResponse(error, response);
 };
+
+export default middleware;

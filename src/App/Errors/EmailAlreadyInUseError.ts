@@ -1,6 +1,6 @@
 import BaseError from './BaseError';
 
-export default class EmailAlreadyInUseError extends BaseError {
+class EmailAlreadyInUseError extends BaseError {
   constructor() {
     super(
       400,
@@ -10,3 +10,5 @@ export default class EmailAlreadyInUseError extends BaseError {
     );
   }
 }
+
+export default EmailAlreadyInUseError;

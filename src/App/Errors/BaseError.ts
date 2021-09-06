@@ -1,6 +1,6 @@
 import { APP_ENV } from '../../Config/app';
 
-export default abstract class BaseError {
+abstract class BaseError {
   constructor(
     public code: number,
     public name: string,
@@ -30,3 +30,5 @@ export default abstract class BaseError {
     };
   }
 }
+
+export default BaseError;

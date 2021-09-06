@@ -5,7 +5,7 @@ import ResourceNotFoundError from '../../Errors/ResourceNotFoundError';
 import BaseRepository from '../BaseRepository';
 
 // TODO: Find a way to remove the @ts-ignore comments without getting any errors
-export default abstract class SequelizeBaseRepository<M extends Model> implements BaseRepository {
+abstract class SequelizeBaseRepository<M extends Model> implements BaseRepository {
   constructor(protected model: typeof Model) {}
 
   public async all(attributes?: string[]): Promise<M[]> {
@@ -57,3 +57,5 @@ export default abstract class SequelizeBaseRepository<M extends Model> implement
     throw new ResourceNotFoundError();
   }
 }
+
+export default SequelizeBaseRepository;

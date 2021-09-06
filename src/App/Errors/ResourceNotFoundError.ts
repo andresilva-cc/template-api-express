@@ -1,6 +1,6 @@
 import BaseError from './BaseError';
 
-export default class ResourceNotFoundError extends BaseError {
+class ResourceNotFoundError extends BaseError {
   constructor(
     public originalName?: string,
     public stackTrace?: string,
@@ -15,3 +15,5 @@ export default class ResourceNotFoundError extends BaseError {
     );
   }
 }
+
+export default ResourceNotFoundError;

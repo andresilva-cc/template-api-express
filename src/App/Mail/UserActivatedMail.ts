@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 import MailTemplate from './MailTemplate';
 
-export default class UserActivatedMail extends MailTemplate {
+class UserActivatedMail extends MailTemplate {
   constructor(
     protected toName: string,
     protected toAddress: string,
@@ -22,3 +22,5 @@ export default class UserActivatedMail extends MailTemplate {
     };
   }
 }
+
+export default UserActivatedMail;

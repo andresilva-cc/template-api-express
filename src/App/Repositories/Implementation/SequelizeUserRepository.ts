@@ -4,7 +4,7 @@ import SequelizeBaseRepository from './SequelizeBaseRepository';
 import { User } from '../../Models';
 import UserRepository from '../UserRepository';
 
-export default class SequelizeUserRepository
+class SequelizeUserRepository
   extends SequelizeBaseRepository<User> implements UserRepository {
   constructor() {
     super(User);
@@ -28,3 +28,5 @@ export default class SequelizeUserRepository
     return user !== null;
   }
 }
+
+export default SequelizeUserRepository;

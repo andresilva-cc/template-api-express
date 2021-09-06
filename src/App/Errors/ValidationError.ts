@@ -1,6 +1,6 @@
 import BaseError from './BaseError';
 
-export default class ValidationError extends BaseError {
+class ValidationError extends BaseError {
   constructor(
     public description: string,
     public field?: string,
@@ -26,3 +26,5 @@ export default class ValidationError extends BaseError {
     };
   }
 }
+
+export default ValidationError;

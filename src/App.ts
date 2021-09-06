@@ -9,7 +9,7 @@ import registerRoutes from './Routes';
 import Logger from './App/Utils/Logger';
 import * as models from './App/Models';
 
-export default class App {
+class App {
   private app: express.Express;
 
   private options: AppOptions;
@@ -105,4 +105,5 @@ interface DatabaseOptions {
   storage?: string;
 }
 
+export default App;
 export type Dialect = 'mysql' | 'mariadb' | 'sqlite' | 'postgres' | 'mssql';

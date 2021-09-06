@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 
-export default class PasswordFacade {
+class PasswordFacade {
   public static hash(password: string): string {
     return bcrypt.hashSync(password, 12);
   }
@@ -9,3 +9,5 @@ export default class PasswordFacade {
     return bcrypt.compareSync(password, hash);
   }
 }
+
+export default PasswordFacade;

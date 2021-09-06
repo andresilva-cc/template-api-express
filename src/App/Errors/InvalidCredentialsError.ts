@@ -1,6 +1,6 @@
 import BaseError from './BaseError';
 
-export default class InvalidCredentalsError extends BaseError {
+class InvalidCredentalsError extends BaseError {
   constructor() {
     super(
       401,
@@ -10,3 +10,5 @@ export default class InvalidCredentalsError extends BaseError {
     );
   }
 }
+
+export default InvalidCredentalsError;

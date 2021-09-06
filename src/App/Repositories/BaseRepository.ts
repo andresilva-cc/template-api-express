@@ -1,4 +1,4 @@
-export default interface BaseRepository {
+interface BaseRepository {
   all(attributes?: string[]): Promise<any[]>;
 
   findById(id: number, attributes?: string[]): Promise<any>;
@@ -9,3 +9,5 @@ export default interface BaseRepository {
 
   delete(id: number): Promise<boolean>;
 }
+
+export default BaseRepository;

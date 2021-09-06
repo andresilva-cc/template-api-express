@@ -1,6 +1,6 @@
 import Logger from '../App/Utils/Logger';
 
-export default class DependencyContainer {
+class DependencyContainer {
   private dependencies: Record<string, any> = {};
 
   public register(key: string, value: any): void {
@@ -16,3 +16,5 @@ export default class DependencyContainer {
     return this.dependencies[key];
   }
 }
+
+export default DependencyContainer;

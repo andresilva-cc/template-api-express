@@ -4,7 +4,7 @@ import SequelizeBaseRepository from './SequelizeBaseRepository';
 import { User, UserActivation } from '../../Models';
 import UserActivationRepository from '../UserActivationRepository';
 
-export default class SequelizeUserActivationRepository
+class SequelizeUserActivationRepository
   extends SequelizeBaseRepository<UserActivation> implements UserActivationRepository {
   constructor() {
     super(UserActivation);
@@ -21,3 +21,5 @@ export default class SequelizeUserActivationRepository
     });
   }
 }
+
+export default SequelizeUserActivationRepository;

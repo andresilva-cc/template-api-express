@@ -1,6 +1,6 @@
 import BaseError from './BaseError';
 
-export default class AccountNotActivatedError extends BaseError {
+class AccountNotActivatedError extends BaseError {
   constructor() {
     super(
       401,
@@ -10,3 +10,5 @@ export default class AccountNotActivatedError extends BaseError {
     );
   }
 }
+
+export default AccountNotActivatedError;
