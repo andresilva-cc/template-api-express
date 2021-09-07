@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 import {
   MAIL_SMTP_HOST, MAIL_SMTP_PORT, MAIL_SMTP_USERNAME, MAIL_SMTP_PASSWORD,
-} from '../../Config/mail';
+} from '../../config/mail';
 
 class MailService {
   private transport: nodemailer.Transporter;

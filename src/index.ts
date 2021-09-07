@@ -5,11 +5,11 @@ import Passport from 'passport';
 import App, { Dialect } from './App';
 import {
   APP_PORT, APP_SSL, APP_SSL_KEY, APP_SSL_CERT,
-} from './Config/app';
+} from './config/app';
 import {
   DB_DIALECT, DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD,
-} from './Config/database';
-import * as authStrategies from './App/Auth';
+} from './config/database';
+import * as authStrategies from './app/Auth';
 
 new App(
   // Options

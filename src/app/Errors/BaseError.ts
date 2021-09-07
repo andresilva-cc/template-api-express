@@ -1,4 +1,4 @@
-import { APP_ENV } from '../../Config/app';
+import { APP_ENV } from '../../config/app';
 
 abstract class BaseError {
   constructor(

@@ -1,5 +1,5 @@
 import { JsonWebTokenError, JwtPayload } from 'jsonwebtoken';
-import { TokenFacade } from '../../App/Facades';
+import { TokenFacade } from '../../app/Facades';
 
 describe('TokenFacade', () => {
   let token: string;

@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
-import { APP_NAME } from '../../Config/app';
-import { MAIL_SMTP_USERNAME } from '../../Config/mail';
+import { APP_NAME } from '../../config/app';
+import { MAIL_SMTP_USERNAME } from '../../config/mail';
 
 abstract class MailTemplate {
   protected fromName: string;

@@ -1,4 +1,4 @@
-import { PasswordFacade } from '../../App/Facades';
+import { PasswordFacade } from '../../app/Facades';
 
 describe('PasswordFacade', () => {
   beforeAll(() => {

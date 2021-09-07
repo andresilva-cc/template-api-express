@@ -1,5 +1,5 @@
-import env from '../App/Utils/env';
-import { parseBoolean } from '../App/Utils/helpers';
+import env from '../app/Utils/env';
+import { parseBoolean } from '../app/Utils/helpers';
 
 export const APP_NAME = env('APP_NAME', 'My App');
 

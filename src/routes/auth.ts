@@ -1,6 +1,6 @@
 import { Express } from 'express';
-import { localAuthStrategyMiddleware } from '../Middlewares';
-import { AuthController } from '../App/Controllers';
+import { localAuthStrategyMiddleware } from '../middlewares';
+import { AuthController } from '../app/Controllers';
 
 export default (application: Express) => {
   application.post('/auth/login', localAuthStrategyMiddleware);

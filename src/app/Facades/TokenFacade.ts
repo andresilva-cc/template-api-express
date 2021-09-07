@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { AUTH_SECRET } from '../../Config/auth';
+import { AUTH_SECRET } from '../../config/auth';
 
 class JWTFacade {
   static async sign(payload: object, options?: jwt.SignOptions) {

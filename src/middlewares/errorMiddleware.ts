@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import BaseError from '../App/Errors/BaseError';
-import ErrorParser from '../App/Errors/ErrorParser';
+import BaseError from '../app/Errors/BaseError';
+import ErrorParser from '../app/Errors/ErrorParser';
 
 const sendErrorResponse = (error: any, response: Response) => response
   .status(error.code)

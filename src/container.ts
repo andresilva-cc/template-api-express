@@ -1,8 +1,8 @@
 import DependencyContainer from './lib/DependencyContainer';
 import {
   SequelizeUserActivationRepository, SequelizeUserRepository,
-} from './App/Repositories/Implementation';
-import { AuthService, MailService } from './App/Services';
+} from './app/Repositories/Implementation';
+import { AuthService, MailService } from './app/Services';
 
 const container = new DependencyContainer();
 

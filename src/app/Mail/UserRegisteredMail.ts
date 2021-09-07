@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 import MailTemplate from './MailTemplate';
-import { APP_URL } from '../../Config/app';
+import { APP_URL } from '../../config/app';
 
 class UserRegisteredMail extends MailTemplate {
   constructor(

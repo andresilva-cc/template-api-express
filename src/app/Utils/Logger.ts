@@ -2,7 +2,7 @@
 
 import symbols from 'log-symbols';
 import chalk from 'chalk';
-import { APP_ENV } from '../../Config/app';
+import { APP_ENV } from '../../config/app';
 
 class Logger {
   static info(message: string, environments = ['production', 'development', 'test']) {

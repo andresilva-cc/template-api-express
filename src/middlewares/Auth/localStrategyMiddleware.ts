@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import Passport from 'passport';
-import { BadRequestError } from '../../App/Errors';
-import { TokenFacade } from '../../App/Facades';
+import { BadRequestError } from '../../app/Errors';
+import { TokenFacade } from '../../app/Facades';
 
 function localStrategyMiddleware(
   request: Request, response: Response, next: NextFunction,

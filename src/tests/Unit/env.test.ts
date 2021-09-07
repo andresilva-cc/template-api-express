@@ -1,4 +1,4 @@
-import env from '../../App/Utils/env';
+import env from '../../app/Utils/env';
 
 describe('env', () => {
   it('should return the defined value', () => {

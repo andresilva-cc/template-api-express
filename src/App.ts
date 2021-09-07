@@ -4,10 +4,10 @@ import https from 'https';
 import express from 'express';
 import Passport from 'passport';
 import { Sequelize } from 'sequelize-typescript';
-import { errorMiddleware } from './Middlewares';
-import registerRoutes from './Routes';
-import Logger from './App/Utils/Logger';
-import * as models from './App/Models';
+import { errorMiddleware } from './middlewares';
+import registerRoutes from './routes';
+import Logger from './app/Utils/Logger';
+import * as models from './app/Models';
 
 class App {
   private app: express.Express;

@@ -1,4 +1,4 @@
-import Logger from '../App/Utils/Logger';
+import Logger from '../app/Utils/Logger';
 
 class DependencyContainer {
   private dependencies: Record<string, any> = {};

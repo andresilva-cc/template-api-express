@@ -1,4 +1,4 @@
-import { parseBoolean } from '../../App/Utils/helpers';
+import { parseBoolean } from '../../app/Utils/helpers';
 
 describe('helpers', () => {
   describe('parseBoolean', () => {
