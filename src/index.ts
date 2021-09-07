@@ -1,7 +1,3 @@
-import morgan from 'morgan';
-import cors from 'cors';
-import bodyParser from 'body-parser';
-import Passport from 'passport';
 import App, { Dialect } from './App';
 import {
   APP_PORT, APP_SSL, APP_SSL_KEY, APP_SSL_CERT,
@@ -9,6 +5,7 @@ import {
 import {
   DB_DIALECT, DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD,
 } from './config/database';
+import middlewares from './middlewares/Setup';
 import * as authStrategies from './app/Auth';
 
 new App(
@@ -31,13 +28,7 @@ new App(
   },
 
   // Middlewares
-  [
-    morgan('dev'),
-    cors(),
-    bodyParser.urlencoded({ extended: true }),
-    bodyParser.json(),
-    Passport.initialize(),
-  ],
+  middlewares,
 
   // Auth strategies
   Object.values(authStrategies),

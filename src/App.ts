@@ -4,10 +4,10 @@ import https from 'https';
 import express from 'express';
 import Passport from 'passport';
 import { Sequelize } from 'sequelize-typescript';
-import { errorMiddleware } from './middlewares';
 import registerRoutes from './routes';
 import Logger from './app/Utils/Logger';
 import * as models from './app/Models';
+import Middleware from './lib/Middleware';
 
 class App {
   private app: express.Express;
@@ -16,21 +16,30 @@ class App {
 
   private sequelize?: Sequelize;
 
-  constructor(options: AppOptions, middlewares: any, authStrategies: Passport.Strategy[]) {
+  constructor(
+    options: AppOptions,
+    middlewares: MiddlewareList,
+    authStrategies: Passport.Strategy[],
+  ) {
     Logger.info('Initializing Express application...');
     this.app = express();
     this.options = options;
 
-    this.registerMiddlewares(middlewares);
+    this.registerMiddlewares(middlewares.pre);
     App.registerAuthStrategies(authStrategies);
     this.registerRoutes();
-    this.registerErrorMiddleware();
+    this.registerMiddlewares(middlewares.post);
     this.createDatabaseConnection();
   }
 
-  private registerMiddlewares(middlewares: express.NextFunction[]) {
+  private registerMiddlewares(middlewares: Array<typeof Middleware>) {
     middlewares.forEach((middleware) => {
-      this.app.use(middleware);
+      if (middleware.isErrorHandlingMiddleware) {
+        this.app.use(middleware.initializeErrorHandler.bind(middleware));
+      } else {
+        this.app.use(middleware.initialize.bind(middleware));
+      }
+
       Logger.info(`Middleware registered: ${middleware.name}`);
     });
   }
@@ -45,11 +54,6 @@ class App {
   private registerRoutes() {
     registerRoutes(this.app);
     Logger.info('Routes registered');
-  }
-
-  private registerErrorMiddleware() {
-    this.app.use(errorMiddleware);
-    Logger.info('Error midleware registered');
   }
 
   private createDatabaseConnection() {
@@ -105,5 +109,15 @@ interface DatabaseOptions {
   storage?: string;
 }
 
+interface MiddlewareList {
+  pre: Array<typeof Middleware>,
+  post: Array<typeof Middleware>,
+}
+
+type Dialect = 'mysql' | 'mariadb' | 'sqlite' | 'postgres' | 'mssql';
+
 export default App;
-export type Dialect = 'mysql' | 'mariadb' | 'sqlite' | 'postgres' | 'mssql';
+export {
+  Dialect,
+  MiddlewareList,
+};
