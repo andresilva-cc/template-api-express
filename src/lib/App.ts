@@ -1,35 +1,35 @@
-import fs from 'fs';
-import http from 'http';
-import https from 'https';
 import express from 'express';
 import Passport from 'passport';
+import { Dialect } from 'sequelize';
 import { Sequelize } from 'sequelize-typescript';
-import registerRoutes from './routes';
-import Logger from './app/Utils/Logger';
-import * as models from './app/Models';
-import Middleware from './lib/Middleware';
+import registerRoutes from '../routes';
+import Logger from '../app/Utils/Logger';
+import * as models from '../app/Models';
+import Middleware from './Middleware';
+import MiddlewareList from './MiddlewareList';
 
 class App {
   private app: express.Express;
 
-  private options: AppOptions;
-
   private sequelize?: Sequelize;
 
   constructor(
-    options: AppOptions,
     middlewares: MiddlewareList,
     authStrategies: Passport.Strategy[],
+    private databaseOptions: DatabaseOptions,
   ) {
     Logger.info('Initializing Express application...');
     this.app = express();
-    this.options = options;
 
     this.registerMiddlewares(middlewares.pre);
     App.registerAuthStrategies(authStrategies);
     this.registerRoutes();
     this.registerMiddlewares(middlewares.post);
     this.createDatabaseConnection();
+  }
+
+  public getExpressInstance(): express.Express {
+    return this.app;
   }
 
   private registerMiddlewares(middlewares: Array<typeof Middleware>) {
@@ -58,45 +58,16 @@ class App {
 
   private createDatabaseConnection() {
     this.sequelize = new Sequelize({
-      dialect: this.options.database.dialect,
-      host: this.options.database.host,
-      port: this.options.database.port,
-      database: this.options.database.database,
-      username: this.options.database.username,
-      password: this.options.database.password,
+      dialect: this.databaseOptions.dialect,
+      host: this.databaseOptions.host,
+      port: this.databaseOptions.port,
+      database: this.databaseOptions.database,
+      username: this.databaseOptions.username,
+      password: this.databaseOptions.password,
       models: Object.values(models),
     });
     Logger.info('Database connection created');
   }
-
-  start() {
-    if (this.options.enableSSL) {
-      const options = {
-        key: fs.readFileSync(this.options.ssl.key),
-        cert: fs.readFileSync(this.options.ssl.cert),
-      };
-
-      https.createServer(options, this.app).listen(this.options.port, () => {
-        Logger.success(`HTTPS: Listening on port ${this.options.port}`);
-      });
-    } else {
-      http.createServer(this.app).listen(this.options.port, () => {
-        Logger.success(`HTTP: Listening on port ${this.options.port}`);
-      });
-    }
-  }
-}
-
-interface AppOptions {
-  port: number;
-  enableSSL: boolean;
-  ssl: SSLOptions;
-  database: DatabaseOptions;
-}
-
-interface SSLOptions {
-  key: string;
-  cert: string;
 }
 
 interface DatabaseOptions {
@@ -109,15 +80,4 @@ interface DatabaseOptions {
   storage?: string;
 }
 
-interface MiddlewareList {
-  pre: Array<typeof Middleware>,
-  post: Array<typeof Middleware>,
-}
-
-type Dialect = 'mysql' | 'mariadb' | 'sqlite' | 'postgres' | 'mssql';
-
 export default App;
-export {
-  Dialect,
-  MiddlewareList,
-};

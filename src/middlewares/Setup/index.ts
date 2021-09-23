@@ -1,4 +1,4 @@
-import { MiddlewareList } from '../../App';
+import { MiddlewareList } from '../../lib';
 import CORSMiddleware from './CORSMiddleware';
 import ErrorMiddleware from './ErrorMiddleware';
 import JSONParserMiddleware from './JSONParserMiddleware';
