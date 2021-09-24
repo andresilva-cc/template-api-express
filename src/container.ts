@@ -6,13 +6,16 @@ import { AuthService, MailService } from './app/Services';
 
 const container = new DependencyContainer();
 
+// Repositories
 container.register('UserRepository', new SequelizeUserRepository());
 container.register('UserActivationRepository', new SequelizeUserActivationRepository());
+
+// Services
+container.register('MailService', new MailService());
 container.register('AuthService', new AuthService(
   container.get('UserRepository'),
   container.get('UserActivationRepository'),
-  container.get('MailRepository'),
+  container.get('MailService'),
 ));
-container.register('MailService', new MailService());
 
 export default container;
