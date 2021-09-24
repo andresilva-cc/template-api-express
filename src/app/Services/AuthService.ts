@@ -1,7 +1,9 @@
 import { nanoid } from 'nanoid';
 import MailService from './MailService';
-import { BadRequestError, EmailAlreadyInUseError } from '../Errors';
-import { PasswordFacade } from '../Facades';
+import {
+  AccountNotActivatedError, BadRequestError, EmailAlreadyInUseError, InvalidCredentialsError,
+} from '../Errors';
+import { PasswordFacade, TokenFacade } from '../Facades';
 import { UserActivatedMail, UserRegisteredMail } from '../Mail';
 import { User } from '../Models';
 import { UserActivationRepository, UserRepository } from '../Repositories';
@@ -12,6 +14,26 @@ class AuthService {
     private userActivationRepository: UserActivationRepository,
     private mailService: MailService,
   ) {}
+
+  public async login(email: string, password: string): Promise<any> {
+    const user = await this.userRepository.findByEmail(email);
+
+    if (!user) {
+      throw new InvalidCredentialsError();
+    }
+
+    if (!user.active) {
+      throw new AccountNotActivatedError();
+    }
+
+    const passwordMatches = PasswordFacade.compare(password, user.password);
+
+    if (!passwordMatches) {
+      throw new InvalidCredentialsError();
+    }
+
+    return AuthService.generateToken(user);
+  }
 
   public async register(name: string, email: string, password: string): Promise<void> {
     if (await this.userRepository.emailExists(email)) {
@@ -41,6 +63,24 @@ class AuthService {
     await this.userActivationRepository.delete(activation.userId);
 
     this.sendUserActivatedMail(activation.user as User);
+  }
+
+  private static async generateToken(user: User): Promise<any> {
+    const userData = {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+    };
+
+    const authData = {
+      user: userData,
+      token: await TokenFacade.sign(userData, {
+        expiresIn: 60 * 60,
+      }),
+
+    };
+
+    return authData;
   }
 
   private async createUserActivation(user: User): Promise<void> {

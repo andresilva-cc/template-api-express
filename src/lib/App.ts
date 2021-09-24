@@ -1,5 +1,4 @@
 import express from 'express';
-import Passport from 'passport';
 import { Dialect } from 'sequelize';
 import { Sequelize } from 'sequelize-typescript';
 import registerRoutes from '../routes';
@@ -15,14 +14,12 @@ class App {
 
   constructor(
     middlewares: MiddlewareList,
-    authStrategies: Passport.Strategy[],
     private databaseOptions: DatabaseOptions,
   ) {
     Logger.info('Initializing Express application...');
     this.app = express();
 
     this.registerMiddlewares(middlewares.pre);
-    App.registerAuthStrategies(authStrategies);
     this.registerRoutes();
     this.registerMiddlewares(middlewares.post);
     this.createDatabaseConnection();
@@ -41,13 +38,6 @@ class App {
       }
 
       Logger.info(`Middleware registered: ${middleware.name}`);
-    });
-  }
-
-  private static registerAuthStrategies(strategies: Passport.Strategy[]) {
-    strategies.forEach((strategy) => {
-      Passport.use(strategy);
-      Logger.info(`Auth strategy registered: ${strategy.name}`);
     });
   }
 

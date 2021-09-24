@@ -6,6 +6,23 @@ import container from '../../container';
 class AuthController {
   private static authService = <AuthService>container.get('AuthService');
 
+  public static async login(request: Request, response: Response, next: NextFunction) {
+    try {
+      if (!request.body.email || !request.body.password) {
+        throw new BadRequestError();
+      }
+
+      const authData = await AuthController.authService.login(
+        request.body.email,
+        request.body.password,
+      );
+
+      return response.status(200).send(authData);
+    } catch (error) {
+      return next(error);
+    }
+  }
+
   public static async register(request: Request, response: Response, next: NextFunction) {
     try {
       if (!request.body.email || !request.body.password) {

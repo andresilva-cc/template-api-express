@@ -1,7 +1,6 @@
 import { Dialect } from 'sequelize';
 import { App, Server } from './lib';
 import middlewares from './middlewares/Setup';
-import * as authStrategies from './app/Auth';
 
 // Config
 import {
@@ -14,9 +13,6 @@ import {
 const app = new App(
   // Middlewares
   middlewares,
-
-  // Auth strategies
-  Object.values(authStrategies),
 
   // Database Options
   {
