@@ -1,7 +1,7 @@
 import express from 'express';
 import { Dialect } from 'sequelize';
 import { Sequelize } from 'sequelize-typescript';
-import registerRoutes from '../routes';
+import * as routes from '../routes';
 import Logger from '../app/Utils/Logger';
 import * as models from '../app/Models';
 import Middleware from './Middleware';
@@ -42,8 +42,12 @@ class App {
   }
 
   private registerRoutes() {
-    registerRoutes(this.app);
-    Logger.info('Routes registered');
+    Object.values(routes).forEach((routeGroup) => {
+      routeGroup.forEach((route) => {
+        this.app[route.method](route.path, route.handle.bind(route));
+        Logger.info(`Route registered: ${route.method.toUpperCase()} ${route.path}`);
+      });
+    });
   }
 
   private createDatabaseConnection() {

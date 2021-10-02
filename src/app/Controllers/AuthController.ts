@@ -1,22 +1,21 @@
 import { NextFunction, Request, Response } from 'express';
 import { ActivateAction, LoginAction, RegisterAction } from '../Actions/Auth';
 import { BadRequestError } from '../Errors';
-import container from '../../container';
 
 class AuthController {
-  private static activateAction = <ActivateAction>container.get('ActivateAction');
+  constructor(
+    private activateAction: ActivateAction,
+    private loginAction: LoginAction,
+    private registerAction: RegisterAction,
+  ) {}
 
-  private static loginAction = <LoginAction>container.get('LoginAction');
-
-  private static registerAction = <RegisterAction>container.get('RegisterAction');
-
-  public static async login(request: Request, response: Response, next: NextFunction) {
+  public async login(request: Request, response: Response, next: NextFunction) {
     try {
       if (!request.body.email || !request.body.password) {
         throw new BadRequestError();
       }
 
-      const authData = await AuthController.loginAction.run({
+      const authData = await this.loginAction.run({
         email: request.body.email,
         password: request.body.password,
       });
@@ -27,13 +26,13 @@ class AuthController {
     }
   }
 
-  public static async register(request: Request, response: Response, next: NextFunction) {
+  public async register(request: Request, response: Response, next: NextFunction) {
     try {
       if (!request.body.email || !request.body.password) {
         throw new BadRequestError();
       }
 
-      await AuthController.registerAction.run({
+      await this.registerAction.run({
         name: request.body.name,
         email: request.body.email,
         password: request.body.password,
@@ -45,9 +44,9 @@ class AuthController {
     }
   }
 
-  public static async activate(request: Request, response: Response, next: NextFunction) {
+  public async activate(request: Request, response: Response, next: NextFunction) {
     try {
-      await AuthController.activateAction.run({
+      await this.activateAction.run({
         token: request.params.token,
       });
 
