@@ -1,11 +1,11 @@
-import { MiddlewareList } from '../../lib';
+import { GlobalMiddlewareList } from '../../lib';
 import CORSMiddleware from './CORSMiddleware';
 import ErrorMiddleware from './ErrorMiddleware';
 import JSONParserMiddleware from './JSONParserMiddleware';
 import LoggerMiddleware from './LoggerMiddleware';
 import URLEncodedParserMiddleware from './URLEncodedParserMiddleware';
 
-const middlewares: MiddlewareList = {
+const middlewares: GlobalMiddlewareList = {
   pre: [
     LoggerMiddleware,
     CORSMiddleware,

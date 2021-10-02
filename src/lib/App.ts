@@ -5,7 +5,7 @@ import registerRoutes from '../routes';
 import Logger from '../app/Utils/Logger';
 import * as models from '../app/Models';
 import Middleware from './Middleware';
-import MiddlewareList from './MiddlewareList';
+import GlobalMiddlewareList from './GlobalMiddlewareList';
 
 class App {
   private app: express.Express;
@@ -13,7 +13,7 @@ class App {
   private sequelize?: Sequelize;
 
   constructor(
-    middlewares: MiddlewareList,
+    middlewares: GlobalMiddlewareList,
     private databaseOptions: DatabaseOptions,
   ) {
     Logger.info('Initializing Express application...');
