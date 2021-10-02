@@ -3,7 +3,7 @@ import {
   MAIL_SMTP_HOST, MAIL_SMTP_PORT, MAIL_SMTP_USERNAME, MAIL_SMTP_PASSWORD,
 } from '../../config/mail';
 
-class MailService {
+class MailFacade {
   private transport: nodemailer.Transporter;
 
   constructor() {
@@ -22,4 +22,4 @@ class MailService {
   }
 }
 
-export default MailService;
+export default MailFacade;

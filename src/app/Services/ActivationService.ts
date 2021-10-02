@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
-import MailService from './MailService';
 import { BadRequestError } from '../Errors';
+import { MailFacade } from '../Facades';
 import { UserActivatedMail, UserRegisteredMail } from '../Mail';
 import { User } from '../Models';
 import { UserActivationRepository, UserRepository } from '../Repositories';
@@ -9,7 +9,7 @@ class ActivationService {
   constructor(
     private userRepository: UserRepository,
     private userActivationRepository: UserActivationRepository,
-    private mailService: MailService,
+    private mailService: MailFacade,
   ) {}
 
   public async createUserActivation(user: User): Promise<string> {
