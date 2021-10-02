@@ -1,14 +1,14 @@
 import { Action } from '../../../lib';
-import { AuthService } from '../../Services';
+import { ActivationService } from '../../Services';
 
 class ActivateAction implements Action {
   constructor(
-    private authService: AuthService,
+    private activationService: ActivationService,
   ) {}
 
   public async run(data: ActivateParams): Promise<any> {
-    const user = await this.authService.activate(data.token);
-    this.authService.sendUserActivatedMail(user);
+    const user = await this.activationService.activateUser(data.token);
+    this.activationService.sendUserActivatedMail(user);
   }
 }
 

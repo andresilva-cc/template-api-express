@@ -3,7 +3,7 @@ import { ActivateAction, LoginAction, RegisterAction } from './app/Actions/Auth'
 import {
   SequelizeUserActivationRepository, SequelizeUserRepository,
 } from './app/Repositories/Implementation';
-import { AuthService, MailService } from './app/Services';
+import { ActivationService, AuthService, MailService } from './app/Services';
 
 const container = new DependencyContainer();
 
@@ -13,20 +13,24 @@ container.register('UserActivationRepository', new SequelizeUserActivationReposi
 
 // Services
 container.register('MailService', new MailService());
-container.register('AuthService', new AuthService(
+container.register('ActivationService', new ActivationService(
   container.get('UserRepository'),
   container.get('UserActivationRepository'),
   container.get('MailService'),
 ));
+container.register('AuthService', new AuthService(
+  container.get('UserRepository'),
+));
 
 // Actions
 container.register('ActivateAction', new ActivateAction(
-  container.get('AuthService'),
+  container.get('ActivationService'),
 ));
 container.register('LoginAction', new LoginAction(
   container.get('AuthService'),
 ));
 container.register('RegisterAction', new RegisterAction(
+  container.get('ActivationService'),
   container.get('AuthService'),
 ));
 
