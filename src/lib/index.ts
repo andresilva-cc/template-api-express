@@ -1,3 +1,4 @@
+export { default as Action } from './Action';
 export { default as App } from './App';
 export { default as DependencyContainer } from './DependencyContainer';
 export { default as Middleware } from './Middleware';

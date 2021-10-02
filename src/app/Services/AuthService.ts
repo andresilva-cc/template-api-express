@@ -35,21 +35,19 @@ class AuthService {
     return AuthService.generateToken(user);
   }
 
-  public async register(name: string, email: string, password: string): Promise<void> {
+  public async register(name: string, email: string, password: string): Promise<User> {
     if (await this.userRepository.emailExists(email)) {
       throw new EmailAlreadyInUseError();
     }
 
-    const user = await this.userRepository.create({
+    return this.userRepository.create({
       name,
       email,
       password: PasswordFacade.hash(password),
     });
-
-    this.createUserActivation(user);
   }
 
-  public async activate(token: string): Promise<void> {
+  public async activate(token: string): Promise<User> {
     const activation = await this.userActivationRepository.findByToken(token);
 
     if (!activation) {
@@ -62,7 +60,7 @@ class AuthService {
 
     await this.userActivationRepository.delete(activation.userId);
 
-    this.sendUserActivatedMail(activation.user as User);
+    return activation.user;
   }
 
   private static async generateToken(user: User): Promise<any> {
@@ -83,7 +81,7 @@ class AuthService {
     return authData;
   }
 
-  private async createUserActivation(user: User): Promise<void> {
+  public async createUserActivation(user: User): Promise<string> {
     let token;
     let activationExists;
 
@@ -99,14 +97,14 @@ class AuthService {
       token,
     });
 
-    this.sendUserRegisteredMail(user, token);
+    return token;
   }
 
-  private sendUserRegisteredMail(user: User, token: string) {
+  public sendUserRegisteredMail(user: User, token: string) {
     this.mailService.send(new UserRegisteredMail(user.name, user.email, token).build());
   }
 
-  private sendUserActivatedMail(user: User) {
+  public sendUserActivatedMail(user: User) {
     this.mailService.send(new UserActivatedMail(user.name, user.email).build());
   }
 }

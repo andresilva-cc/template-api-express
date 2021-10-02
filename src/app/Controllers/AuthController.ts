@@ -1,10 +1,14 @@
 import { NextFunction, Request, Response } from 'express';
+import { ActivateAction, LoginAction, RegisterAction } from '../Actions/Auth';
 import { BadRequestError } from '../Errors';
-import { AuthService } from '../Services';
 import container from '../../container';
 
 class AuthController {
-  private static authService = <AuthService>container.get('AuthService');
+  private static activateAction = <ActivateAction>container.get('ActivateAction');
+
+  private static loginAction = <LoginAction>container.get('LoginAction');
+
+  private static registerAction = <RegisterAction>container.get('RegisterAction');
 
   public static async login(request: Request, response: Response, next: NextFunction) {
     try {
@@ -12,10 +16,10 @@ class AuthController {
         throw new BadRequestError();
       }
 
-      const authData = await AuthController.authService.login(
-        request.body.email,
-        request.body.password,
-      );
+      const authData = await AuthController.loginAction.run({
+        email: request.body.email,
+        password: request.body.password,
+      });
 
       return response.status(200).send(authData);
     } catch (error) {
@@ -29,9 +33,12 @@ class AuthController {
         throw new BadRequestError();
       }
 
-      await AuthController.authService.register(
-        request.body.name, request.body.email, request.body.password,
-      );
+      await AuthController.registerAction.run({
+        name: request.body.name,
+        email: request.body.email,
+        password: request.body.password,
+      });
+
       return response.sendStatus(201);
     } catch (error) {
       return next(error);
@@ -40,7 +47,9 @@ class AuthController {
 
   public static async activate(request: Request, response: Response, next: NextFunction) {
     try {
-      await AuthController.authService.activate(request.params.token);
+      await AuthController.activateAction.run({
+        token: request.params.token,
+      });
 
       return response.status(200).send('Account activated, you can login now.');
     } catch (error) {
