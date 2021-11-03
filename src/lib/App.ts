@@ -1,6 +1,7 @@
 import express from 'express';
 import { Dialect } from 'sequelize';
 import { Sequelize } from 'sequelize-typescript';
+import { Container } from 'injektion';
 import * as routes from '../routes';
 import Logger from '../app/Utils/Logger';
 import * as models from '../app/Models';
@@ -13,12 +14,14 @@ class App {
   private sequelize?: Sequelize;
 
   constructor(
+    private container: Container,
     middlewares: GlobalMiddlewareList,
     private databaseOptions: DatabaseOptions,
   ) {
     Logger.info('Initializing Express application...');
     this.app = express();
 
+    this.registerContainerAsGlobal();
     this.registerMiddlewares(middlewares.pre);
     this.registerRoutes();
     this.registerMiddlewares(middlewares.post);
@@ -27,6 +30,10 @@ class App {
 
   public getExpressInstance(): express.Express {
     return this.app;
+  }
+
+  private registerContainerAsGlobal() {
+    global.container = this.container;
   }
 
   private registerMiddlewares(middlewares: Array<typeof Middleware>) {
@@ -61,6 +68,11 @@ class App {
       models: Object.values(models),
     });
     Logger.info('Database connection created');
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  public async autoloadDependencies() {
+    await global.container.autoload();
   }
 }
 

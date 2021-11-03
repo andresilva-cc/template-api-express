@@ -1,5 +1,4 @@
 import express, { NextFunction, Request, Response } from 'express';
-import container from '../container';
 
 type MethodType = keyof typeof express.application;
 
@@ -10,7 +9,7 @@ class Route {
     private readonly handler: Array<any>,
   ) {}
 
-  public handle(request: Request, response: Response, next: NextFunction) {
+  public async handle(request: Request, response: Response, next: NextFunction) {
     const controller = <any>container.get(this.handler[0].name);
     controller[this.handler[1]](request, response, next);
   }

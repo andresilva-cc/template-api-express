@@ -9,7 +9,7 @@ class ActivationService {
   constructor(
     private userRepository: UserRepository,
     private userActivationRepository: UserActivationRepository,
-    private mailService: MailFacade,
+    private mailFacade: MailFacade,
   ) {}
 
   public async createUserActivation(user: User): Promise<string> {
@@ -48,11 +48,11 @@ class ActivationService {
   }
 
   public sendUserRegisteredMail(user: User, token: string) {
-    this.mailService.send(new UserRegisteredMail(user.name, user.email, token).build());
+    this.mailFacade.send(new UserRegisteredMail(user.name, user.email, token).build());
   }
 
   public sendUserActivatedMail(user: User) {
-    this.mailService.send(new UserActivatedMail(user.name, user.email).build());
+    this.mailFacade.send(new UserActivatedMail(user.name, user.email).build());
   }
 }
 
