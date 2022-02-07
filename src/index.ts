@@ -13,13 +13,8 @@ import {
 
 (async () => {
   const app = new App(
-    // Container
     container,
-
-    // Middlewares
     middlewares,
-
-    // Database Options
     {
       dialect: DB_DIALECT as Dialect,
       host: DB_HOST,
