@@ -12,10 +12,10 @@ class Server {
 
   public start(): void {
     if (this.options.enableSSL) {
-      this.startHTTPSServer();
-    } else {
-      this.startHTTPServer();
+      return this.startHTTPSServer();
     }
+
+    return this.startHTTPServer();
   }
 
   private startHTTPServer(): void {
