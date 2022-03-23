@@ -1,6 +1,6 @@
 import { Dialect } from 'sequelize';
 import { App, Server } from './lib';
-import container from './container';
+import dependencies from './config/dependencies';
 import middlewares from './middlewares/Global';
 
 // Config
@@ -13,7 +13,7 @@ import {
 
 (async () => {
   const app = new App(
-    container,
+    dependencies,
     middlewares,
     {
       dialect: DB_DIALECT as Dialect,

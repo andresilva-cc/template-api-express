@@ -1,4 +1,5 @@
 import express, { NextFunction, Request, Response } from 'express';
+import { Container } from 'injektion';
 
 type MethodType = keyof typeof express.application;
 
@@ -10,6 +11,7 @@ class Route {
   ) {}
 
   public async handle(request: Request, response: Response, next: NextFunction) {
+    const container = Container.getInstance();
     const controller = <any>container.get(this.handler[0].name);
     controller[this.handler[1]](request, response, next);
   }

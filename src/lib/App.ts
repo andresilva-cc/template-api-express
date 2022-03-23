@@ -14,14 +14,14 @@ class App {
   private sequelize?: Sequelize;
 
   constructor(
-    private container: Container,
+    private dependencies: Function,
     middlewares: GlobalMiddlewareList,
     private databaseOptions: DatabaseOptions,
   ) {
     Logger.info('Initializing Express application...');
     this.app = express();
 
-    this.registerContainerAsGlobal();
+    this.registerDependencies();
     this.registerMiddlewares(middlewares.pre);
     this.registerRoutes();
     this.registerMiddlewares(middlewares.post);
@@ -32,8 +32,8 @@ class App {
     return this.app;
   }
 
-  private registerContainerAsGlobal() {
-    global.container = this.container;
+  private registerDependencies() {
+    this.dependencies();
   }
 
   private registerMiddlewares(middlewares: Array<typeof Middleware>) {
@@ -72,7 +72,7 @@ class App {
 
   // eslint-disable-next-line class-methods-use-this
   public async autoloadDependencies() {
-    await global.container.autoload();
+    await Container.getInstance().autoload('./src/app');
   }
 }
 
