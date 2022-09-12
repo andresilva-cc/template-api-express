@@ -1,4 +1,5 @@
 import express, { NextFunction, Request, Response } from 'express';
+import Handler from './Handler';
 
 type MethodType = keyof typeof express.application;
 
@@ -6,7 +7,7 @@ class Route {
   constructor(
     public readonly method: MethodType,
     public readonly path: string,
-    private readonly handler: Array<any>,
+    private readonly handler: Handler,
   ) {}
 
   public async handle(request: Request, response: Response, next: NextFunction) {
