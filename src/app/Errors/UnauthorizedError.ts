@@ -1,4 +1,4 @@
-import BaseError from './BaseError';
+import { BaseError } from './BaseError';
 
 class UnauthorizedError extends BaseError {
   constructor(
@@ -16,4 +16,4 @@ class UnauthorizedError extends BaseError {
   }
 }
 
-export default UnauthorizedError;
+export { UnauthorizedError };

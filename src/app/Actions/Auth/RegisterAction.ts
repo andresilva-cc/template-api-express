@@ -20,4 +20,4 @@ interface RegisterParams {
   password: string,
 }
 
-export default RegisterAction;
+export { RegisterAction };

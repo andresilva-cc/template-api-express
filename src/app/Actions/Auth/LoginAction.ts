@@ -16,4 +16,4 @@ interface LoginParams {
   password: string,
 }
 
-export default LoginAction;
+export { LoginAction };

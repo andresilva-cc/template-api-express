@@ -1,4 +1,4 @@
-import env from '../app/Utils/env';
+import { env } from '../app/Utils/env';
 import { parseBoolean } from '../app/Utils/helpers';
 
 export const APP_NAME = env('APP_NAME', 'My App');

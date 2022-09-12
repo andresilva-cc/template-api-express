@@ -1,4 +1,4 @@
-import env from '../app/Utils/env';
+import { env } from '../app/Utils/env';
 
 export const MAIL_SMTP_HOST = env('MAIL_SMTP_HOST', 'smtp.domain.com');
 

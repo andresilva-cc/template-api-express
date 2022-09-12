@@ -31,4 +31,4 @@ abstract class BaseError {
   }
 }
 
-export default BaseError;
+export { BaseError };

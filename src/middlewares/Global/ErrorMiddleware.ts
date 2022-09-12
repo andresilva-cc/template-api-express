@@ -1,6 +1,6 @@
-import Middleware from '../../lib/Middleware';
-import BaseError from '../../app/Errors/BaseError';
-import ErrorParser from '../../app/Errors/ErrorParser';
+import { Middleware } from '../../lib/Middleware';
+import { BaseError } from '../../app/Errors/BaseError';
+import { ErrorParser } from '../../app/Errors/ErrorParser';
 
 class ErrorMiddleware extends Middleware {
   public static override isErrorHandlingMiddleware = true;
@@ -33,4 +33,4 @@ class ErrorMiddleware extends Middleware {
   }
 }
 
-export default ErrorMiddleware;
+export { ErrorMiddleware };

@@ -56,4 +56,4 @@ class ActivationService {
   }
 }
 
-export default ActivationService;
+export { ActivationService };

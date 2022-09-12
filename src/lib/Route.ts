@@ -1,5 +1,5 @@
 import express, { NextFunction, Request, Response } from 'express';
-import Handler from './Handler';
+import { Handler } from './Handler';
 
 type MethodType = keyof typeof express.application;
 
@@ -16,4 +16,4 @@ class Route {
   }
 }
 
-export default Route;
+export { Route };

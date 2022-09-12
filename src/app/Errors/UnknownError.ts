@@ -1,4 +1,4 @@
-import BaseError from './BaseError';
+import { BaseError } from './BaseError';
 
 class UnknownError extends BaseError {
   constructor(
@@ -16,4 +16,4 @@ class UnknownError extends BaseError {
   }
 }
 
-export default UnknownError;
+export { UnknownError };

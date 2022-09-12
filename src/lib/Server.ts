@@ -2,7 +2,7 @@ import fs from 'fs';
 import http from 'http';
 import https from 'https';
 import express from 'express';
-import Logger from '../app/Utils/Logger';
+import { Logger } from '../app/Utils/Logger';
 
 class Server {
   constructor(
@@ -47,4 +47,4 @@ interface SSLOptions {
   cert: string;
 }
 
-export default Server;
+export { Server };

@@ -1,5 +1,5 @@
-import Handler from '../Handler';
-import Route from '../Route';
+import { Handler } from '../Handler';
+import { Route } from '../Route';
 
 class RouteFacade {
   public static checkout(path: string, handler: Handler) {
@@ -95,4 +95,4 @@ class RouteFacade {
   }
 }
 
-export default RouteFacade;
+export { RouteFacade as Route };

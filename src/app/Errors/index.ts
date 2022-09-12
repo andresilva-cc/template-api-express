@@ -1,12 +1,10 @@
-/* eslint-disable import/prefer-default-export */
-
-export { default as AccountNotActivatedError } from './AccountNotActivatedError';
-export { default as BadRequestError } from './BadRequestError';
-export { default as EmailAlreadyInUseError } from './EmailAlreadyInUseError';
-export { default as ForbiddenError } from './ForbiddenError';
-export { default as InvalidCredentialsError } from './InvalidCredentialsError';
-export { default as ResourceNotFoundError } from './ResourceNotFoundError';
-export { default as ServiceUnavailableError } from './ServiceUnavailableError';
-export { default as UnauthorizedError } from './UnauthorizedError';
-export { default as UnknownError } from './UnknownError';
-export { default as ValidationError } from './ValidationError';
+export { AccountNotActivatedError } from './AccountNotActivatedError';
+export { BadRequestError } from './BadRequestError';
+export { EmailAlreadyInUseError } from './EmailAlreadyInUseError';
+export { ForbiddenError } from './ForbiddenError';
+export { InvalidCredentialsError } from './InvalidCredentialsError';
+export { ResourceNotFoundError } from './ResourceNotFoundError';
+export { ServiceUnavailableError } from './ServiceUnavailableError';
+export { UnauthorizedError } from './UnauthorizedError';
+export { UnknownError } from './UnknownError';
+export { ValidationError } from './ValidationError';

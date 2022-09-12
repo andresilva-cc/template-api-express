@@ -1,4 +1,4 @@
-import env from '../app/Utils/env';
+import { env } from '../app/Utils/env';
 
 export const DB_HOST = env('DB_HOST', 'localhost');
 

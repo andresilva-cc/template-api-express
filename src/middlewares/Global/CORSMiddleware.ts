@@ -1,5 +1,5 @@
 import cors from 'cors';
-import Middleware from '../../lib/Middleware';
+import { Middleware } from '../../lib/Middleware';
 
 class CORSMiddleware extends Middleware {
   protected static override handle(): any {
@@ -7,4 +7,4 @@ class CORSMiddleware extends Middleware {
   }
 }
 
-export default CORSMiddleware;
+export { CORSMiddleware };

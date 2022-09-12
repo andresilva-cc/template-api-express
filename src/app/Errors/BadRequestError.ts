@@ -1,4 +1,4 @@
-import BaseError from './BaseError';
+import { BaseError } from './BaseError';
 
 class BadRequestError extends BaseError {
   constructor(
@@ -16,4 +16,4 @@ class BadRequestError extends BaseError {
   }
 }
 
-export default BadRequestError;
+export { BadRequestError };

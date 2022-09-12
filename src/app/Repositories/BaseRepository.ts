@@ -10,4 +10,4 @@ interface BaseRepository {
   delete(id: number): Promise<boolean>;
 }
 
-export default BaseRepository;
+export { BaseRepository };

@@ -3,10 +3,10 @@ import { Dialect } from 'sequelize';
 import { Sequelize } from 'sequelize-typescript';
 import { Container } from 'injektion';
 import * as routes from '../routes';
-import Logger from '../app/Utils/Logger';
+import { Logger } from '../app/Utils/Logger';
 import * as models from '../app/Models';
-import Middleware from './Middleware';
-import GlobalMiddlewareList from './GlobalMiddlewareList';
+import { Middleware } from './Middleware';
+import { GlobalMiddlewareList } from './GlobalMiddlewareList';
 
 class App {
   private app: express.Express;
@@ -86,4 +86,4 @@ interface DatabaseOptions {
   storage?: string;
 }
 
-export default App;
+export { App };

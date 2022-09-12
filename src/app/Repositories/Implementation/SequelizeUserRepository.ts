@@ -1,8 +1,8 @@
 /* eslint-disable class-methods-use-this */
 
-import SequelizeBaseRepository from './SequelizeBaseRepository';
+import { SequelizeBaseRepository } from './SequelizeBaseRepository';
 import { User } from '../../Models';
-import UserRepository from '../UserRepository';
+import { UserRepository } from '../UserRepository';
 
 class SequelizeUserRepository
   extends SequelizeBaseRepository<User> implements UserRepository {
@@ -29,4 +29,4 @@ class SequelizeUserRepository
   }
 }
 
-export default SequelizeUserRepository;
+export { SequelizeUserRepository };

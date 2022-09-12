@@ -1,8 +1,8 @@
 /* eslint-disable class-methods-use-this */
 
 import { Model } from 'sequelize-typescript';
-import ResourceNotFoundError from '../../Errors/ResourceNotFoundError';
-import BaseRepository from '../BaseRepository';
+import { ResourceNotFoundError } from '../../Errors/ResourceNotFoundError';
+import { BaseRepository } from '../BaseRepository';
 
 // TODO: Find a way to remove the @ts-ignore comments without getting any errors
 abstract class SequelizeBaseRepository<M extends Model> implements BaseRepository {
@@ -58,4 +58,4 @@ abstract class SequelizeBaseRepository<M extends Model> implements BaseRepositor
   }
 }
 
-export default SequelizeBaseRepository;
+export { SequelizeBaseRepository };

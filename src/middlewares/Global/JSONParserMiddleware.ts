@@ -1,5 +1,5 @@
 import bodyParser from 'body-parser';
-import Middleware from '../../lib/Middleware';
+import { Middleware } from '../../lib/Middleware';
 
 class JSONParserMiddleware extends Middleware {
   protected static override handle(): any {
@@ -7,4 +7,4 @@ class JSONParserMiddleware extends Middleware {
   }
 }
 
-export default JSONParserMiddleware;
+export { JSONParserMiddleware };

@@ -22,4 +22,4 @@ class MailFacade {
   }
 }
 
-export default MailFacade;
+export { MailFacade };

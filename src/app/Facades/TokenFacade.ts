@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { AUTH_SECRET } from '../../config/auth';
 
-class JWTFacade {
+class TokenFacade {
   static async sign(payload: object, options?: jwt.SignOptions) {
     return jwt.sign(payload, AUTH_SECRET, options);
   }
@@ -11,4 +11,4 @@ class JWTFacade {
   }
 }
 
-export default JWTFacade;
+export { TokenFacade };

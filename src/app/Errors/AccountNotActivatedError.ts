@@ -1,4 +1,4 @@
-import BaseError from './BaseError';
+import { BaseError } from './BaseError';
 
 class AccountNotActivatedError extends BaseError {
   constructor() {
@@ -11,4 +11,4 @@ class AccountNotActivatedError extends BaseError {
   }
 }
 
-export default AccountNotActivatedError;
+export { AccountNotActivatedError };

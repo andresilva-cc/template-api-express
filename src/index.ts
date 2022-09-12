@@ -1,7 +1,7 @@
 import { Dialect } from 'sequelize';
 import { App, Server } from './lib';
 import container from './container';
-import middlewares from './middlewares/Global';
+import { middlewares } from './middlewares/Global';
 
 // Config
 import {

@@ -1,7 +1,7 @@
 import {
   Table, Column, Model, Length, AllowNull, BelongsTo, DataType, ForeignKey, PrimaryKey,
 } from 'sequelize-typescript';
-import User from './User';
+import { User } from './User';
 
 @Table({
   timestamps: false,
@@ -22,4 +22,4 @@ class UserActivation extends Model {
   token!: string;
 }
 
-export default UserActivation;
+export { UserActivation };

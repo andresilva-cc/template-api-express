@@ -1,4 +1,4 @@
-import BaseError from './BaseError';
+import { BaseError } from './BaseError';
 
 class ValidationError extends BaseError {
   constructor(
@@ -27,4 +27,4 @@ class ValidationError extends BaseError {
   }
 }
 
-export default ValidationError;
+export { ValidationError };

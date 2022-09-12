@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-import Logger from '../../app/Utils/Logger';
+import { Logger } from '../../app/Utils/Logger';
 
 describe('Logger', () => {
   beforeAll(() => {

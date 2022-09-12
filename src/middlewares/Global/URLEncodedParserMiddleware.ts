@@ -1,5 +1,5 @@
 import bodyParser from 'body-parser';
-import Middleware from '../../lib/Middleware';
+import { Middleware } from '../../lib/Middleware';
 
 class URLEncodedParserMiddleware extends Middleware {
   protected static override handle(): any {
@@ -9,4 +9,4 @@ class URLEncodedParserMiddleware extends Middleware {
   }
 }
 
-export default URLEncodedParserMiddleware;
+export { URLEncodedParserMiddleware };

@@ -1,5 +1,5 @@
 import morgan from 'morgan';
-import Middleware from '../../lib/Middleware';
+import { Middleware } from '../../lib/Middleware';
 
 class LoggerMiddleware extends Middleware {
   protected static override handle(): any {
@@ -7,4 +7,4 @@ class LoggerMiddleware extends Middleware {
   }
 }
 
-export default LoggerMiddleware;
+export { LoggerMiddleware };

@@ -19,4 +19,4 @@ abstract class MailTemplate {
   }
 }
 
-export default MailTemplate;
+export { MailTemplate };

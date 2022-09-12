@@ -1,4 +1,4 @@
-import BaseError from './BaseError';
+import { BaseError } from './BaseError';
 import {
   AccountNotActivatedError, BadRequestError, EmailAlreadyInUseError, ForbiddenError,
   InvalidCredentialsError, ResourceNotFoundError, ServiceUnavailableError, ValidationError,
@@ -50,4 +50,4 @@ class ErrorParser {
   }
 }
 
-export default ErrorParser;
+export { ErrorParser };

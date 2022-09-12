@@ -10,4 +10,4 @@ class PasswordFacade {
   }
 }
 
-export default PasswordFacade;
+export { PasswordFacade };

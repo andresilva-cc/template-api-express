@@ -1,3 +1,1 @@
-/* eslint-disable import/prefer-default-export */
-
-export { default as Route } from './Route';
+export { Route } from './Route';

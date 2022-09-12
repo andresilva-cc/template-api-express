@@ -1,9 +1,9 @@
 import { GlobalMiddlewareList } from '../../lib';
-import CORSMiddleware from './CORSMiddleware';
-import ErrorMiddleware from './ErrorMiddleware';
-import JSONParserMiddleware from './JSONParserMiddleware';
-import LoggerMiddleware from './LoggerMiddleware';
-import URLEncodedParserMiddleware from './URLEncodedParserMiddleware';
+import { CORSMiddleware } from './CORSMiddleware';
+import { ErrorMiddleware } from './ErrorMiddleware';
+import { JSONParserMiddleware } from './JSONParserMiddleware';
+import { LoggerMiddleware } from './LoggerMiddleware';
+import { URLEncodedParserMiddleware } from './URLEncodedParserMiddleware';
 
 const middlewares: GlobalMiddlewareList = {
   pre: [
@@ -17,4 +17,4 @@ const middlewares: GlobalMiddlewareList = {
   ],
 };
 
-export default middlewares;
+export { middlewares };

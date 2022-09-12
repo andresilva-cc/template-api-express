@@ -8,7 +8,8 @@ module.exports = {
     project: './tsconfig.json',
   },
   rules: {
-    "no-throw-literal": 'off',
-    "@typescript-eslint/no-throw-literal": 'off'
+    'import/prefer-default-export': 'off',
+    'no-throw-literal': 'off',
+    '@typescript-eslint/no-throw-literal': 'off'
   }
 };

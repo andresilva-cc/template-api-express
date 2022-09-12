@@ -1,4 +1,2 @@
-/* eslint-disable import/prefer-default-export */
-
-export { default as User } from './User';
-export { default as UserActivation } from './UserActivation';
+export { User } from './User';
+export { UserActivation } from './UserActivation';

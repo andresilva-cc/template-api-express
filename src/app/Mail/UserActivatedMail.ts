@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer';
-import MailTemplate from './MailTemplate';
+import { MailTemplate } from './MailTemplate';
 
 class UserActivatedMail extends MailTemplate {
   constructor(
@@ -23,4 +23,4 @@ class UserActivatedMail extends MailTemplate {
   }
 }
 
-export default UserActivatedMail;
+export { UserActivatedMail };

@@ -1,4 +1,4 @@
-import BaseError from './BaseError';
+import { BaseError } from './BaseError';
 
 class ServiceUnavailableError extends BaseError {
   constructor(
@@ -16,4 +16,4 @@ class ServiceUnavailableError extends BaseError {
   }
 }
 
-export default ServiceUnavailableError;
+export { ServiceUnavailableError };

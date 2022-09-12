@@ -16,4 +16,4 @@ interface ActivateParams {
   token: string,
 }
 
-export default ActivateAction;
+export { ActivateAction };
